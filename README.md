@@ -1,2 +1,109 @@
-# miyoushe_prospect_code_get
-原神/崩铁/绝区零米游社官方API接口获取兑换码
+# 米游社直播兑换码自动获取工具
+
+[![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+## 📖 简介
+
+这是一个用于自动获取米游社各游戏（原神、崩坏：星穹铁道、绝区零）直播兑换码的 Python 工具。它可以自动扫描米游社首页的导航栏，识别含有兑换码、直播码等字样的活动入口，并提取其中的兑换码信息。
+
+## ✨ 功能特点
+
+- 🎮 **多游戏支持**：同时支持原神、崩坏：星穹铁道、绝区零三款游戏
+- 🔍 **智能识别**：自动识别首页导航栏中的兑换码活动入口
+- 📦 **批量获取**：一键获取所有可用的直播兑换码
+- 🔄 **随机设备标识**：每次运行自动生成随机的设备指纹和设备ID，避免被识别
+- 📝 **Cookie智能解析**：支持多种格式的Cookie字段名（stuid、ltuid、account_id等）
+- 📊 **清晰输出**：格式化显示兑换码及其对应的奖励信息
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Python 3.9 或更高版本
+- 依赖库：`requests`
+
+### 安装依赖
+
+```bash
+pip install requests
+```
+
+### 使用方法
+
+1. **获取Cookie信息**
+   
+   本工具需要提供米游社的Cookie信息，包含以下三个关键字段：
+   - `stuid` 或类似的uid字段
+   - `stoken`
+   - `mid` 或类似的mid字段
+   
+   > ❓ **不会获取stoken等cookie？** 请跳转项目：[https://github.com/Lyb001-Nahida/miyoushe-stoken-get](https://github.com/Lyb001-Nahida/miyoushe-stoken-get)
+
+2. **运行程序**
+
+   ```bash
+   python 兑换码.py
+   ```
+
+3. **粘贴Cookie**
+
+   按照提示粘贴完整的Cookie字符串，例如：
+   ```
+   stoken=xxxxxx; mid=xxxxxx; stuid=xxxxxx; ...
+   ```
+
+4. **等待结果**
+
+   程序会自动扫描各游戏的兑换码活动，并显示获取到的兑换码列表。
+
+## 📋 支持的Cookie字段
+
+| 字段类型 | 支持的字段名 |
+|---------|------------|
+| UID字段 | `stuid`, `stuid_v2`, `ltuid`, `ltuid_v2`, `account_id`, `account_id_v2` |
+| MID字段 | `mid`, `stmid_v2`, `stmid`, `ltmid`, `ltmid_v2` |
+| Token字段 | `stoken`（必须精确匹配） |
+
+## 📝 输出示例
+
+```
+============================================================
+【崩坏：星穹铁道】
+【兑换码 1】
+  奖励: 星琼×50
+  兑换码: XXXXYYYYZZZZ
+  timestamp: 1700000000
+
+【兑换码 2】
+  奖励: 信用点×10000
+  兑换码: AAAABBBBCCCC
+  timestamp: 1700000000
+```
+
+## ⚠️ 注意事项
+
+- 每个兑换码每个账号**限领一次**
+- 兑换码通常有**时效性**，请尽快使用
+- 程序显示的 `timestamp` 为接口返回的原始数据，表示兑换码的生效时间点
+- 建议不要在短时间内频繁运行，以免触发风控
+
+## 🔧 常见问题
+
+### Q: 为什么获取不到兑换码？
+A: 可能原因：
+- 当前没有正在进行的直播兑换码活动
+- Cookie已过期或无效
+- 网络连接问题
+
+### Q: Cookie中的字段名不匹配怎么办？
+A: 程序已经支持多种常见的字段名变体，如果仍然无法识别，可以检查Cookie字符串格式是否正确。
+
+### Q: 运行报错怎么办？
+A: 请检查：
+- Python版本是否≥3.9
+- 是否已安装requests库
+- 网络连接是否正常
+
+## 📄 许可证
+本项目采用 MIT 许可证 - 详见 LICENSE 文件
